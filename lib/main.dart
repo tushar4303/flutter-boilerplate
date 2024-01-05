@@ -1,5 +1,6 @@
 import 'package:boilerplate/firebase_options.dart';
 import 'package:boilerplate/screens/dataGrid.dart';
+import 'package:boilerplate/screens/homescreen.dart';
 import 'package:boilerplate/screens/loginScreen.dart';
 import 'package:boilerplate/utils/AuthHelper.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const Placeholder(child: Text('Screen 2')),
+    HomeScreen(),
     GridScreen(),
     const Signout(),
   ];

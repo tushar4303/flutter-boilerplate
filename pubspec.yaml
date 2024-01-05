@@ -37,7 +37,8 @@ dependencies:
   firebase_auth:
   google_sign_in:
   quickalert:
-  shared_preferences: ^2.2.2
+  shared_preferences:
+  http:
 
 dev_dependencies:
   flutter_test:
