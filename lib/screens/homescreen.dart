@@ -1,4 +1,5 @@
 import 'package:boilerplate/models/productModel.dart';
+import 'package:boilerplate/productCard.dart';
 import 'package:boilerplate/utils/productapi.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: FutureBuilder<ProductList>(
         future: futureProducts,
         builder: (context, snapshot) {
@@ -31,10 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: snapshot.data!.products.length,
               itemBuilder: (context, index) {
                 Product product = snapshot.data!.products[index];
-                return ListTile(
-                  title: Text(product.title),
-                  subtitle: Text('Price: \$${product.price.toString()}'),
-                );
+                return ProductCard(product: product);
               },
             );
           }

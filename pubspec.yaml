@@ -38,6 +38,7 @@ dependencies:
   google_sign_in:
   quickalert:
   shared_preferences:
+  shimmer:
   http:
 
 dev_dependencies:

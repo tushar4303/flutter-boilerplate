@@ -76,7 +76,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Asilia Tech")),
+      appBar: AppBar(
+          toolbarHeight: kTextTabBarHeight + 20,
+          title: const Text(
+            "Asilia Tech",
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
+          )),
       body: AnimatedBuilder(
         animation: _pageController,
         builder: (context, child) {
