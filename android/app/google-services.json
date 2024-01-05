@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "357185833921",
+    "project_id": "asilia-tech",
+    "storage_bucket": "asilia-tech.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357185833921:android:6d657313d4236755273d40",
+        "android_client_info": {
+          "package_name": "com.example.boilerplate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "357185833921-568jektqp5i0kkqp4m8vslirtv5a7i49.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwWGGf4_qpM0Xy3WQynzJ8pYghr1Kocbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "357185833921-568jektqp5i0kkqp4m8vslirtv5a7i49.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
