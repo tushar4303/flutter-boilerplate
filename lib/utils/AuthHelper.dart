@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+// for login persistance
 class AuthHelper {
   static const String isLoggedInKey = 'isLoggedIn';
 

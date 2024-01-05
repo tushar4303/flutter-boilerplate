@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ProductDetailsPage extends StatelessWidget {
   final Product product;
 
-  const ProductDetailsPage({super.key, required this.product});
+  const ProductDetailsPage({super.key, Key? key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,7 @@ class ProductDetailsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Display product thumbnail
               AspectRatio(
                 aspectRatio: 16 / 9,
                 child: ClipRRect(
@@ -29,6 +30,7 @@ class ProductDetailsPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+              // Display product title and category tag
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -46,6 +48,7 @@ class ProductDetailsPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
+              // product brand
               Row(
                 children: [
                   const Icon(
@@ -64,6 +67,7 @@ class ProductDetailsPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
+              // product price
               Row(
                 children: [
                   const Text(
@@ -76,6 +80,7 @@ class ProductDetailsPage extends StatelessWidget {
                   ),
                   if (product.discountPercentage > 0) ...[
                     const SizedBox(width: 8),
+                    // discounted price with slash effect
                     Text(
                       '\$${(product.price - (product.price * product.discountPercentage / 100)).toStringAsFixed(2)}',
                       style: TextStyle(
@@ -89,6 +94,7 @@ class ProductDetailsPage extends StatelessWidget {
                   const SizedBox(
                     width: 12,
                   ),
+                  // Display original price
                   Text(
                     '\$${product.price.toStringAsFixed(2)}',
                     style: TextStyle(
@@ -100,12 +106,14 @@ class ProductDetailsPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
+              // product description
               Text(
                 'Description: ${product.description}',
                 textAlign: TextAlign.justify,
                 style: const TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 8),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -150,6 +158,7 @@ class ProductDetailsPage extends StatelessWidget {
     );
   }
 
+  // category tag widget
   Widget _buildCategoryTag(String category) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

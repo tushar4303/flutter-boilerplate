@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:boilerplate/utils/AuthHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -5,6 +7,7 @@ import 'package:boilerplate/main.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
+// Scopes required for Google Sign-In
 const List<String> scopes = <String>[
   'email',
   'https://www.googleapis.com/auth/contacts.readonly',
@@ -15,7 +18,7 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 );
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+  const SignInPage({super.key, Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,7 @@ class SignInPage extends StatelessWidget {
   }
 }
 
+// Widget for displaying the logo and message
 class _Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -56,6 +60,7 @@ class _Logo extends StatelessWidget {
   }
 }
 
+// Widget for the sign-in form content
 class _FormContent extends StatefulWidget {
   @override
   State<_FormContent> createState() => _FormContentState();
@@ -76,6 +81,7 @@ class _FormContentState extends State<_FormContent> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Email input field
             TextFormField(
               controller: _emailController,
               validator: (value) {
@@ -100,6 +106,7 @@ class _FormContentState extends State<_FormContent> {
               ),
             ),
             const SizedBox(height: 16),
+            // Password input field
             TextFormField(
               controller: _passwordController,
               validator: (value) {
@@ -133,6 +140,7 @@ class _FormContentState extends State<_FormContent> {
               ),
             ),
             const SizedBox(height: 16),
+            // Sign-in button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -157,6 +165,7 @@ class _FormContentState extends State<_FormContent> {
               ),
             ),
             const SizedBox(height: 8),
+            // Google Sign-In button
             _GoogleSignInButton()
           ],
         ),
@@ -164,13 +173,16 @@ class _FormContentState extends State<_FormContent> {
     );
   }
 
+  // handle sign-in with email and password
   Future<void> _signInWithEmailPassword(BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       try {
+        // Validate email and password
         print("sign-in...");
         print("Email: ${_emailController.text}");
         print("Password: ${_passwordController.text}");
 
+        // Dummy email and password
         const password = '\$Crosslinks4303';
 
         if (_emailController.text == 'padhytushar4303@gmail.com' &&
@@ -196,6 +208,7 @@ class _FormContentState extends State<_FormContent> {
   }
 }
 
+// Widget for Google Sign-In button
 class _GoogleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -234,15 +247,16 @@ class _GoogleSignInButton extends StatelessWidget {
   }
 }
 
+// handle Google Sign-In
 Future<void> _signInWithGoogle(BuildContext context) async {
   try {
     await _googleSignIn.signIn();
-    // ignore: use_build_context_synchronously
+    // Navigate to the home page after successful sign-in
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const MyHomePage()),
     );
-    // ignore: use_build_context_synchronously
+    // Show success alert
     QuickAlert.show(
       context: context,
       type: QuickAlertType.success,

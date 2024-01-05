@@ -139,6 +139,7 @@ class Signout extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           ElevatedButton(
+            // prompt for confirmation before logging out
             onPressed: () {
               QuickAlert.show(
                 context: context,

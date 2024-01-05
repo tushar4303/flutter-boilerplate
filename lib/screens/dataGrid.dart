@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quickalert/quickalert.dart';
 
 class GridScreen extends StatefulWidget {
-  const GridScreen({super.key});
+  const GridScreen({Key? key}) : super(key: key);
 
   @override
   _GridScreenState createState() => _GridScreenState();
@@ -30,6 +30,7 @@ class _GridScreenState extends State<GridScreen> {
     });
   }
 
+  // Show informative alerts on screen initialization
   Future<void> _showAlerts() async {
     await Future.delayed(
         const Duration(milliseconds: 300)); // Delay between alerts
@@ -95,6 +96,7 @@ class _GridScreenState extends State<GridScreen> {
               ],
             ),
             const SizedBox(height: 20),
+            // Input textfield for manual grid entry
             TextField(
               maxLength: rows * columns,
               onChanged: (value) {
@@ -112,6 +114,7 @@ class _GridScreenState extends State<GridScreen> {
               ),
             ),
             const SizedBox(height: 10),
+            // Checkbox for random order highlighting
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -127,6 +130,7 @@ class _GridScreenState extends State<GridScreen> {
                 ),
               ],
             ),
+            // Search textfield
             TextField(
               onChanged: (value) {
                 setState(() {
@@ -142,6 +146,7 @@ class _GridScreenState extends State<GridScreen> {
               ),
             ),
             const SizedBox(height: 20),
+            // Display the grid using GridView.builder
             GridView.builder(
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -197,6 +202,7 @@ class _GridScreenState extends State<GridScreen> {
     );
   }
 
+  // Initialize grid based on the entered number of rows and columns
   void _initializeGrid() {
     grid = List.generate(rows, (index) => List.filled(columns, ''));
     highlightMatrix =
@@ -204,6 +210,7 @@ class _GridScreenState extends State<GridScreen> {
     _updateSearchTextEnabled();
   }
 
+  // Distribute input string to the grid
   void _distributeStringToGrid() {
     int index = 0;
     grid = List.generate(rows, (index) => List.filled(columns, ''));
@@ -218,6 +225,7 @@ class _GridScreenState extends State<GridScreen> {
     _updateSearchTextEnabled();
   }
 
+  // Search for the entered text and highlight corresponding grid elements
   void _searchAndHighlight() {
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < columns; j++) {
@@ -236,6 +244,7 @@ class _GridScreenState extends State<GridScreen> {
     }
   }
 
+  // Check for random order of the search text
   void _checkRandomOrder() {
     List<String> shuffledSearchText = searchText.split('')..shuffle();
 
@@ -253,6 +262,7 @@ class _GridScreenState extends State<GridScreen> {
     }
   }
 
+  // Check for the search text horizontally
   void _checkHorizontal() {
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < columns; j++) {
@@ -267,6 +277,7 @@ class _GridScreenState extends State<GridScreen> {
     }
   }
 
+  // Check for the search text vertically
   void _checkVertical() {
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < columns; j++) {
@@ -281,6 +292,7 @@ class _GridScreenState extends State<GridScreen> {
     }
   }
 
+  // Update the state to enable or disable the search textfield
   void _updateSearchTextEnabled() {
     setState(() {
       controller.text = '';

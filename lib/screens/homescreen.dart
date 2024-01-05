@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           future: futureProducts,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
+              // Shimmer effect while waiting for data
               return Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
                 highlightColor: Colors.grey[100]!,
@@ -48,8 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             } else if (snapshot.hasError) {
+              // Display error message if there's an issue with data fetching
               return Text('Error: ${snapshot.error}');
             } else {
+              // Display the list of products using ProductCard widget
               return ListView.builder(
                 itemCount: snapshot.data!.products.length,
                 itemBuilder: (context, index) {

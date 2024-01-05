@@ -14,7 +14,7 @@ class ProductCardShimmer extends StatelessWidget {
             height: 120,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              color: Colors.grey[300], // Shimmer color
+              color: Colors.grey[300],
             ),
           ),
           Expanded(
@@ -27,13 +27,13 @@ class ProductCardShimmer extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     height: 16,
-                    color: Colors.grey[300], // Shimmer color
+                    color: Colors.grey[300],
                   ),
                   const SizedBox(height: 4),
                   Container(
                     width: double.infinity,
                     height: 32,
-                    color: Colors.grey[300], // Shimmer color
+                    color: Colors.grey[300],
                   ),
                   const SizedBox(height: 4),
                   Row(
@@ -42,20 +42,20 @@ class ProductCardShimmer extends StatelessWidget {
                       Container(
                         width: 80,
                         height: 16,
-                        color: Colors.grey[300], // Shimmer color
+                        color: Colors.grey[300],
                       ),
                       Row(
                         children: [
                           Container(
                             width: 40,
                             height: 16,
-                            color: Colors.grey[300], // Shimmer color
+                            color: Colors.grey[300],
                           ),
                           const SizedBox(width: 4),
                           Container(
                             width: 40,
                             height: 16,
-                            color: Colors.grey[300], // Shimmer color
+                            color: Colors.grey[300],
                           ),
                         ],
                       ),
