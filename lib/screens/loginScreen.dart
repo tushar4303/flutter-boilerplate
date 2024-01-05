@@ -18,7 +18,7 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 );
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key, Key? key});
+  const SignInPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
