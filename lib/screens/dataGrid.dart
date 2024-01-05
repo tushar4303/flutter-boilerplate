@@ -1,6 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:quickalert/quickalert.dart';
 
 class GridScreen extends StatefulWidget {
+  const GridScreen({super.key});
+
   @override
   _GridScreenState createState() => _GridScreenState();
 }
@@ -16,6 +21,34 @@ class _GridScreenState extends State<GridScreen> {
   bool randomOrder = false;
 
   TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showAlerts();
+    });
+  }
+
+  Future<void> _showAlerts() async {
+    await Future.delayed(
+        const Duration(milliseconds: 300)); // Delay between alerts
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.info,
+      text:
+          'Fill the grid either by manually entering values in each block or use the input textfield to automatically fill the grid for you.',
+    );
+
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.info,
+      text:
+          "Enable 'Random Order' to highlight every letter from the search word, regardless of their sequence. Turn it off to search for words either vertically or horizontally in the grid.",
+    );
+
+    await Future.delayed(const Duration(seconds: 1)); // Delay between alerts
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +99,8 @@ class _GridScreenState extends State<GridScreen> {
               maxLength: rows * columns,
               onChanged: (value) {
                 setState(() {
-                  inputString = value;
+                  inputString = value.toLowerCase();
+
                   _distributeStringToGrid();
                   _searchAndHighlight();
                   _updateSearchTextEnabled();
@@ -81,7 +115,7 @@ class _GridScreenState extends State<GridScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Random Order:'),
+                const Text('Random Order:'),
                 Checkbox(
                   value: randomOrder,
                   onChanged: (value) {
@@ -96,13 +130,13 @@ class _GridScreenState extends State<GridScreen> {
             TextField(
               onChanged: (value) {
                 setState(() {
-                  searchText = value;
+                  searchText = value.toLowerCase();
                   _searchAndHighlight();
                 });
               },
               decoration: InputDecoration(
                 labelText: 'Search text:',
-                labelStyle: TextStyle(color: Colors.black87),
+                labelStyle: const TextStyle(color: Colors.black87),
                 // Disable the search text field if not all elements are filled
                 enabled: inputString.length == rows * columns,
               ),
@@ -142,7 +176,7 @@ class _GridScreenState extends State<GridScreen> {
                       onChanged: (value) {
                         setState(() {
                           grid[rowIndex][columnIndex] =
-                              value.length > 0 ? value[0] : '';
+                              value.isNotEmpty ? value[0] : '';
                           _updateSearchTextEnabled();
                         });
                       },
@@ -154,7 +188,7 @@ class _GridScreenState extends State<GridScreen> {
                 );
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             )
           ],

@@ -1,5 +1,5 @@
 import 'package:boilerplate/models/productModel.dart';
-import 'package:boilerplate/screens/productDetailsPage.dart';
+import 'package:boilerplate/screens/homescreen/productDetailsPage.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -32,7 +32,7 @@ class ProductCard extends StatelessWidget {
                   image: NetworkImage(
                     product.images.isNotEmpty
                         ? product.images[0]
-                        : 'placeholder_image_url',
+                        : 'assets/images/placeholder.png',
                   ),
                   fit: BoxFit.cover,
                 ),

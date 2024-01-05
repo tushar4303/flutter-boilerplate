@@ -5,7 +5,6 @@ import 'package:boilerplate/screens/loginScreen.dart';
 import 'package:boilerplate/utils/AuthHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:boilerplate/main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quickalert/quickalert.dart';
 
@@ -36,7 +35,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final bool isLoggedIn;
 
-  MyApp({required this.isLoggedIn});
+  const MyApp({super.key, required this.isLoggedIn});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: isLoggedIn ? MyHomePage() : SignInPage(),
+      home: isLoggedIn ? const MyHomePage() : const SignInPage(),
     );
   }
 }
@@ -58,12 +57,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    HomeScreen(),
-    GridScreen(),
+    const HomeScreen(),
+    const GridScreen(),
     const Signout(),
   ];
 
@@ -100,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
         type: BottomNavigationBarType.fixed,
         enableFeedback: true,
         selectedItemColor: Colors.black,
-        unselectedItemColor: Color.fromRGBO(173, 170, 173, 1),
+        unselectedItemColor: const Color.fromRGBO(173, 170, 173, 1),
         currentIndex: _currentIndex,
         onTap: (index) {
           _pageController.animateToPage(
@@ -154,12 +153,12 @@ class Signout extends StatelessWidget {
 
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => SignInPage()),
+                    MaterialPageRoute(builder: (context) => const SignInPage()),
                   );
                 },
               );
             },
-            child: Text('Logout'),
+            child: const Text('Logout'),
           ),
         ],
       ),

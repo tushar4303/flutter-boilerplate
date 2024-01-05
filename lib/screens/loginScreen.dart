@@ -1,6 +1,5 @@
 import 'package:boilerplate/utils/AuthHelper.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:boilerplate/main.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -16,6 +15,8 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 );
 
 class SignInPage extends StatelessWidget {
+  const SignInPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +46,7 @@ class _Logo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "Welcome to Flutter!",
+            "Sign In to continue forward",
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
@@ -73,7 +74,6 @@ class _FormContentState extends State<_FormContent> {
       child: Form(
         key: _formKey,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
@@ -137,8 +137,10 @@ class _FormContentState extends State<_FormContent> {
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black87,
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
                 onPressed: () => _signInWithEmailPassword(context),
@@ -176,7 +178,15 @@ class _FormContentState extends State<_FormContent> {
           AuthHelper.setLoggedIn(true);
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => MyHomePage()),
+            MaterialPageRoute(builder: (context) => const MyHomePage()),
+          );
+        } else {
+          // Show snackbar for wrong password
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Wrong password. Please try again.'),
+              duration: Duration(seconds: 2),
+            ),
           );
         }
       } catch (e) {
@@ -194,40 +204,51 @@ class _GoogleSignInButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
         onPressed: () => _signInWithGoogle(context),
-        child: const Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Text(
-            'Sign in with Google',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/google.png',
+              height: 24,
+              width: 24,
             ),
-          ),
+            const SizedBox(width: 10),
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
+}
 
-  Future<void> _signInWithGoogle(BuildContext context) async {
-    try {
-      await _googleSignIn.signIn();
-      // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MyHomePage()),
-      );
-      // ignore: use_build_context_synchronously
-      QuickAlert.show(
-        context: context,
-        type: QuickAlertType.success,
-        text: 'Logged in Successfully!',
-      );
-    } catch (error) {
-      print(error);
-    }
+Future<void> _signInWithGoogle(BuildContext context) async {
+  try {
+    await _googleSignIn.signIn();
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const MyHomePage()),
+    );
+    // ignore: use_build_context_synchronously
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.success,
+      text: 'Logged in Successfully!',
+    );
+  } catch (error) {
+    print(error);
   }
 }
